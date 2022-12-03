@@ -34,12 +34,19 @@ namespace TitanHunter.Scenes
             components.Add(player);
             components.Add(new EnemyManager(mainGame));
             components.Add(new CollisionManager(mainGame, player));
-            
+            components.Add(new HeaderComponent(mainGame));
         }
 
         public override void Update(GameTime gameTime)
         {
-            //todo for the enemycontroller
+            //if game reset is true when user tries to escape from the game since it is already game over.
+            if(mainGame.gameLevelService.IsGameReset() == true)
+            {
+                Projectile.projectiles.Clear();
+                Enemy.enemies.Clear();           
+                player.Reset();
+            }
+
             if (mainGame.gameLevelService.IsGameOver()) { return; }
 
             foreach (Projectile proj in Projectile.projectiles)

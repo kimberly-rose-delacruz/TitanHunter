@@ -30,6 +30,7 @@ namespace TitanHunter.Scenes
             components = new List<GameComponent>();
             Hide();
         }
+
         public override void Update(GameTime gameTime)
         {
             foreach (GameComponent item in components)

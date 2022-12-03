@@ -16,6 +16,7 @@ namespace TitanHunter
         public ActionScene actionScene;
         public GameLevelService gameLevelService;
         public HelpScene helpscene;
+        private KeyboardState oldKeyboardState = Keyboard.GetState();
 
 
         public MainGame()
@@ -24,7 +25,7 @@ namespace TitanHunter
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             _graphics.PreferredBackBufferWidth = 1000;
-            _graphics.PreferredBackBufferHeight = 620;
+            _graphics.PreferredBackBufferHeight = 633;
             gameLevelService = new GameLevelService();
         }
 
@@ -32,7 +33,6 @@ namespace TitanHunter
         {
 
             // TODO: Add your initialization logic here
-
 
             Shared.stage = new Vector2(_graphics.PreferredBackBufferWidth,
                  _graphics.PreferredBackBufferHeight);
@@ -84,8 +84,13 @@ namespace TitanHunter
             if (startScene.Enabled)
             {
                 selectedIndex = startScene.Menu.selectedIndex;
-                if (selectedIndex == 0 && keyboardState.IsKeyDown(Keys.Enter))
+                if (selectedIndex == 0 && (keyboardState.IsKeyDown(Keys.Enter) && oldKeyboardState.IsKeyUp(Keys.Enter)))
                 {
+                    if (gameLevelService.IsGameOver() == true)
+                    {
+                        gameLevelService.Reset();
+                    }
+
                     HideAllScenes();
                     actionScene.Show();
                 }
@@ -103,7 +108,17 @@ namespace TitanHunter
 
 
             //any of the scene is enabled can do escape from the current scene and return back to the startscene to show it.
-            if (actionScene.Enabled || helpscene.Enabled)
+            else if (actionScene.Enabled)
+            {
+                if (keyboardState.IsKeyDown(Keys.Escape) || 
+                    (keyboardState.IsKeyDown(Keys.Enter) && oldKeyboardState.IsKeyUp(Keys.Enter)))
+                {
+                    HideAllScenes();
+                    startScene.Show();
+                }
+            }
+
+            else if(helpscene.Enabled)
             {
                 if (keyboardState.IsKeyDown(Keys.Escape))
                 {
@@ -111,6 +126,8 @@ namespace TitanHunter
                     startScene.Show();
                 }
             }
+
+            oldKeyboardState = keyboardState;
 
             base.Update(gameTime);
         }

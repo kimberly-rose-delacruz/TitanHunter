@@ -55,6 +55,11 @@ namespace TitanHunter.Models
 
         }
 
+        public void Reset()
+        {
+            this.position = new Vector2(Shared.stage.X / 8 - playerTexture.Width / 2, Shared.stage.Y / 2 - playerTexture.Height / 2);
+        }
+
         public override void Update(GameTime gameTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();

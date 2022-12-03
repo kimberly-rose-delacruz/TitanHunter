@@ -12,20 +12,37 @@ namespace TitanHunter.Services
     public class GameLevelService
     {
 
-        public double meteorTimer = 1.5D;
-        public double meteorResetTimeValue = 1.5D;
-        public double enemyTimer = 2D;
-        public double enemyResetTimeValue = 2D;
-        public int totalEnemyCount = 5;
-        public bool isGameOver = false;
+        private double meteorTimer = 1.5D;
+        private double meteorResetTimeValue = 1.5D;
+        private double enemyTimer = 2D;
+        private double enemyResetTimeValue = 2D;
+        private int totalEnemyCount = 5;
+        private bool isGameOver = false;
+        private bool isGameReset = false;
 
+        //game resetting
         public void Reset()
         {
+            //resetting the game when the game is over.
+            isGameReset = true;
+            isGameOver = false;
+        }
 
+        public bool IsGameReset()
+        {
+            if(isGameReset == true)
+            {
+                //set again to false to restart the game again.
+                isGameReset = false;
+                return true;
+            }
+
+            return isGameReset;
         }
 
         public bool IsGameOver()
         {
+            
             return isGameOver;
         }
 

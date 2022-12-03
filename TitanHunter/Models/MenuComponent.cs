@@ -12,27 +12,25 @@ namespace TitanHunter
 {
     public class MenuComponent:DrawableGameComponent
     {
-        private SpriteBatch spriteBatch;
         private SpriteFont regularFont, highlightFont;
         private List<string> menuItems;
         private Vector2 position;
         private Color regularColor = Color.White;
         private Color highlightColor = Color.Gray;
         private KeyboardState oldState;
-
+        MainGame mainGame;
 
         public int selectedIndex { get; set; }
 
         private KeyboardState previousState;
 
-        public MenuComponent(Game game,
+        public MenuComponent(MainGame game,
             SpriteBatch spriteBatch,
             SpriteFont regularFont,
             SpriteFont highlightFont,
             string[] menus) : base(game)
         {
-
-            this.spriteBatch = spriteBatch;
+            this.mainGame = game;
             this.regularFont = regularFont;
             this.highlightFont = highlightFont;
             menuItems = menus.ToList<string>();
@@ -69,24 +67,24 @@ namespace TitanHunter
         {
             Vector2 temporaryPosition = position;
 
-            spriteBatch.Begin();
+            mainGame._spriteBatch.Begin();
             //this is to draw all the menu items in the background.
             for (int i = 0; i < menuItems.Count; i++)
             {
                 if (selectedIndex == i)
                 {
-                    spriteBatch.DrawString(highlightFont, menuItems[i],
+                    mainGame._spriteBatch.DrawString(highlightFont, menuItems[i],
                         temporaryPosition, highlightColor);
                     temporaryPosition.Y += highlightFont.LineSpacing;
                 }
                 else
                 {
-                    spriteBatch.DrawString(regularFont, menuItems[i],
+                    mainGame._spriteBatch.DrawString(regularFont, menuItems[i],
                         temporaryPosition, regularColor);
                     temporaryPosition.Y += regularFont.LineSpacing;
                 }
             }
-            spriteBatch.End();
+            mainGame._spriteBatch.End();
 
             base.Draw(gameTime);
         }

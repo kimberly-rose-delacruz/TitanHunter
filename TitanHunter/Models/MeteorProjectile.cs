@@ -11,18 +11,18 @@ namespace TitanHunter.Models
 {
     public class MeteorProjectile : Projectile
     {
+        
+
         public MeteorProjectile(MainGame mainGame, Vector2 newPosition) : base(mainGame, newPosition)
         {
             this.direction = Dir.Left;
             this.speed = 250;
-            var newPositionValue = position.Y - 100;
 
-            //this is to avoid the meteor showing completely out of the bottom of the stage
-            if(newPositionValue > 0)
+
+            if(position.Y < HeaderComponent.HEADER_HEIGHT)
             {
-                position.Y = newPositionValue;
+                position.Y += HeaderComponent.HEADER_HEIGHT;
             }
-
         }
 
         protected override void InitializeTexture()

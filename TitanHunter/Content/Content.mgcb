@@ -25,6 +25,13 @@
 /processorParam:TextureFormat=Color
 /build:../../../Resources/gameAssetsStorage/ball.png;images/ball.png
 
+#begin fonts/GameTitleFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/GameTitleFont.spritefont
+
 #begin fonts/highlight.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -32,12 +39,33 @@
 /processorParam:TextureFormat=Compressed
 /build:fonts/highlight.spritefont
 
+#begin fonts/medium.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/medium.spritefont
+
+#begin fonts/mediumBold.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/mediumBold.spritefont
+
 #begin fonts/regular.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:fonts/regular.spritefont
+
+#begin fonts/small.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/small.spritefont
 
 #begin images/ball.png
 /importer:TextureImporter
@@ -87,6 +115,18 @@
 /processorParam:TextureFormat=Color
 /build:images/enemyShuriken.png
 
+#begin images/escapeKey.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/escapeKey.png
+
 #begin images/HelpBackground.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -110,6 +150,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/HomeBackground.png
+
+#begin images/keyboard.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/keyboard.png
 
 #begin images/meteor.png
 /importer:TextureImporter
@@ -158,6 +210,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/shuriken.png
+
+#begin images/spacebar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/spacebar.png
 
 #begin sounds/fire.wav
 /importer:WavImporter
