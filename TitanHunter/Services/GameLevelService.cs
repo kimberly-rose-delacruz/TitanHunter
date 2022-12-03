@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TitanHunter.Models;
 
 namespace TitanHunter.Services
 {
@@ -16,16 +17,23 @@ namespace TitanHunter.Services
         private double meteorResetTimeValue = 1.5D;
         private double enemyTimer = 2D;
         private double enemyResetTimeValue = 2D;
-        private int totalEnemyCount = 5;
+        public const int TOTAL_ENEMY_COUNT = 5;
+        public int currentTotalEnemyCount = TOTAL_ENEMY_COUNT;
         private bool isGameOver = false;
         private bool isGameReset = false;
+        public int TotalEnemyKilled { get; private set; }
+        public int TotalDestroyedMeteor { get; private set; }
 
+        
         //game resetting
         public void Reset()
         {
             //resetting the game when the game is over.
             isGameReset = true;
             isGameOver = false;
+            currentTotalEnemyCount = TOTAL_ENEMY_COUNT;
+            TotalEnemyKilled = 0;
+            TotalDestroyedMeteor = 0;
         }
 
         public bool IsGameReset()
@@ -74,9 +82,9 @@ namespace TitanHunter.Services
         {
             enemyTimer -= gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (enemyTimer <= 0 && totalEnemyCount >0 )
+            if (enemyTimer <= 0 && currentTotalEnemyCount > 0)
             {
-                totalEnemyCount--;
+                currentTotalEnemyCount--;
                  enemyTimer = enemyResetTimeValue;
                 return true;
             }
@@ -84,6 +92,14 @@ namespace TitanHunter.Services
             return false;
         }
 
+        public void IncrementKilledEnemy()
+        {
+            TotalEnemyKilled++;
+        }
 
+        public void IncrementDestroyedMeteor()
+        {
+            TotalDestroyedMeteor++;
+        }
     }
 }

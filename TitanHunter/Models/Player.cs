@@ -146,9 +146,7 @@ namespace TitanHunter.Models
 
         public void Kill(Rectangle hitPoint)
         {
-
             killHitPoint = hitPoint;
-
             gameLevelService.PlayerIsDead();
             PlayCollisionSoundEffect();        
         }

@@ -36,7 +36,7 @@ namespace TitanHunter.Services
 
                     if (projectile.getBounds().Intersects(currentMeteor.getBounds()))
                     {
-                        currentMeteor.PlayCollisionSoundEffect();
+                        currentMeteor.Destroy();
                         Projectile.projectiles.Remove(currentMeteor);
                         Projectile.projectiles.Remove(projectile);
                     }
@@ -72,9 +72,6 @@ namespace TitanHunter.Services
                 if(playerBounds.Intersects(currentEnemyBounds))
                 {
                     Rectangle.Intersect(ref playerBounds, ref currentEnemyBounds, out Rectangle hitPoint);
-
-
-
                     player.Kill(hitPoint);
                     
                     //stop all the objects within the field. 

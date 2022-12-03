@@ -25,17 +25,25 @@ namespace TitanHunter.Models
 
         public Enemy(MainGame game, Vector2 position) : base(game)
         {
-            
-            var newPositionValue = position.Y - 70;
 
             this.mainGame = game;
-
-            if(newPositionValue > 0)
-            {
-                position.Y = newPositionValue;
-            }
-            this.position = position;
             InitializeTexture();
+
+            //handle spawning of enemy if enemy height is greater than the stage height
+            if (position.Y > Shared.stage.Y - enemyTexture.Height)
+            {
+                position.Y = Shared.stage.Y - enemyTexture.Height;
+            }
+
+            if(position.Y < HeaderComponent.HEADER_HEIGHT)
+            {
+                position.Y = HeaderComponent.HEADER_HEIGHT;
+            }    
+
+
+
+    
+            this.position = position;
 
         }
 
@@ -83,7 +91,7 @@ namespace TitanHunter.Models
         
         public virtual void Kill()
         {
-
+            mainGame.gameLevelService.IncrementKilledEnemy();
         }
 
     }

@@ -30,11 +30,14 @@ namespace TitanHunter.Models
             Vector2 newPosition) : base(mainGame)
         {
             this.mainGame = mainGame;
+
+
             position = newPosition;
             direction = Dir.Right;
             //loading the projectile texture
             InitializeTexture();
             InitializeSoundEffect();
+
         }
 
         //initialization of texture for the player's projectile of shuriken shoot
@@ -106,6 +109,12 @@ namespace TitanHunter.Models
 
                 this.collisionSoundEffect.Play();
             }
+        }
+
+        public virtual void Destroy()
+        {
+            PlayCollisionSoundEffect();
+           
         }
 
     }
