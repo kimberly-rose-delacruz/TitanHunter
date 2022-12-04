@@ -38,7 +38,6 @@ namespace TitanHunter.Controllers
             if(gameLevelService.SpawnEnemy(gameTime) == true)
             {
                 Enemy.enemies.Add(new Enemy(mainGame, new Vector2(rand.Next((int)(Shared.stage.X * 0.6f), (int)(Shared.stage.X * 0.9f)), rand.Next(Shared.SHARED_HEIGHT, (int)Shared.stage.Y))));
-
             }
 
         }

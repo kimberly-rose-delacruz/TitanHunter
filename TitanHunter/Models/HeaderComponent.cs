@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.XInput;
 using TitanHunter.Services;
 
 namespace TitanHunter.Models
@@ -20,10 +21,12 @@ namespace TitanHunter.Models
         private string killedTitanScoreText = "Titan Score: ";
         private string destroyedMeteorScoreText = "Meteor Score: ";
         private string gameWonText = "CONGRATULATIONS! YOU WON";
+        private string gameWonNewHighScoreText = "NEW HIGH SCORE!";
         private string goToHighScorePageText = "Press [ENTER] to see high score.";
 
         private MainGame mainGame;
         private GameLevelService gameLevelService;
+        private Player player;
 
         SpriteFont gameOverFont;
         SpriteFont gameWonFont;
@@ -41,10 +44,11 @@ namespace TitanHunter.Models
         Vector2 destroyedMeteorScorePosition;
         
 
-        public HeaderComponent(MainGame game) : base(game)
+        public HeaderComponent(MainGame game, Player player) : base(game)
         {
             this.mainGame = game;
             this.gameLevelService = game.gameLevelService;
+            this.player = player;
             
             InitializeResources();
         }
@@ -61,7 +65,15 @@ namespace TitanHunter.Models
 
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            if(gameLevelService.IsGameWon() == true)
+            {
+                player.GameEnd();
+            }
 
+            base.Update(gameTime);
+        }
 
         public override void Draw(GameTime gameTime)
         {
@@ -89,9 +101,15 @@ namespace TitanHunter.Models
             
             if(gameLevelService.IsGameWon() == true)
             {
-                //draw gameWon here.
-                mainGame._spriteBatch.DrawString(gameWonFont, gameWonText, new Vector2(Shared.stage.X / 2 - returnToHomePosition.X / 2, HEADER_HEIGHT / 2), Color.White);
-
+                //if the player wins it will displayed the congratulations status based if it's a new high score or not.
+                if(gameLevelService.HasNewHighScore == true)
+                {
+                    mainGame._spriteBatch.DrawString(gameWonFont, gameWonNewHighScoreText, new Vector2(Shared.stage.X / 2 - gameOverPosition.X / 2, HEADER_HEIGHT / 2), Color.White);
+                }
+                else
+                {
+                    mainGame._spriteBatch.DrawString(gameWonFont, gameWonText, new Vector2(Shared.stage.X / 2 - returnToHomePosition.X / 2, HEADER_HEIGHT / 2), Color.White);
+                }
             }
 
             mainGame._spriteBatch.DrawString(totalScoreFont, totalScoreText  + totalScore.ToString(), new Vector2(GAP_SPACE * 2, GAP_SPACE), Color.White);

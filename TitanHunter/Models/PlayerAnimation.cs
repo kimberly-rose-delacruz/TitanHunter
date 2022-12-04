@@ -10,7 +10,7 @@ using TitanHunter.Services;
 
 namespace TitanHunter.Models
 {
-    public class SpriteAnimation : SpriteManager
+    public class PlayerAnimation : PlayerManager
     {
         private float timeElapsed;
         public bool IsLooping = true;
@@ -18,7 +18,7 @@ namespace TitanHunter.Models
 
         public int FramesPerSecond { set { timeToUpdate = 1f / value; } }
 
-        public SpriteAnimation(Game game, Texture2D Texture, int frames, int fps) : base(game, Texture, frames)
+        public PlayerAnimation(Game game, Texture2D Texture, int frames, int fps) : base(game, Texture, frames)
         {
             FramesPerSecond = fps;
         }
@@ -36,6 +36,7 @@ namespace TitanHunter.Models
                 else if (IsLooping)
                     FrameIndex = 0;
             }
+
             base.Update(gameTime);
         }
 

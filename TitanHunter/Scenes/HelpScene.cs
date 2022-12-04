@@ -18,8 +18,6 @@ namespace TitanHunter.Scenes
         private const int Y_POSITION = 0;
         private const int ADJUSTEDTEXT_X_POSITION = 20;
         private const int GAP_Y_POSITION = 20;
-        private const int GAP_X_POSITION = 30;
-
         private const int PURPOSE_X_POSITION = 60;
         private const int PURPOSE_Y_POSITION = 195;
         private const int OBJECTIVE_X_POSITION = 120;

@@ -18,6 +18,7 @@ namespace TitanHunter
         public ActionScene actionScene;
         public GameLevelService gameLevelService;
         public HelpScene helpscene;
+        public HighScoreScene highSCoreScene;
         private KeyboardState oldKeyboardState = Keyboard.GetState();
 
 
@@ -56,6 +57,9 @@ namespace TitanHunter
             //helpscene
             helpscene = new HelpScene(this);
             this.Components.Add(helpscene);
+
+            highSCoreScene = new HighScoreScene(this);
+            this.Components.Add(highSCoreScene);
 
 
         }
@@ -98,6 +102,11 @@ namespace TitanHunter
                     HideAllScenes();
                     helpscene.Show();
                 }
+                else if(selectedIndex == 2 && keyboardState.IsKeyDown(Keys.Enter))
+                {
+                    HideAllScenes();
+                    highSCoreScene.Show();
+                }
                 else if (selectedIndex == 4 && keyboardState.IsKeyDown(Keys.Enter))
                 {
                     Exit();
@@ -117,9 +126,9 @@ namespace TitanHunter
                 }
             }
 
-            else if(helpscene.Enabled)
+            else if(helpscene.Enabled || highSCoreScene.Enabled)
             {
-                if (keyboardState.IsKeyDown(Keys.Escape))
+                if (keyboardState.IsKeyDown(Keys.Escape)) 
                 {
                     HideAllScenes();
                     startScene.Show();

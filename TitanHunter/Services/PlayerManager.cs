@@ -10,10 +10,10 @@ using SharpDX.Direct3D9;
 
 namespace TitanHunter.Services
 {
-    public class SpriteManager : DrawableGameComponent
+    public class PlayerManager : DrawableGameComponent
     {
         SpriteBatch spriteBatch;
-        protected Texture2D Texture;
+        protected Texture2D texture;
         public Vector2 Position = Vector2.Zero;
         public Color Color = Color.White;
         public Vector2 Origin;
@@ -24,22 +24,22 @@ namespace TitanHunter.Services
         protected int FrameIndex = 0;
 
 
-        public SpriteManager(Game game,
+        public PlayerManager(Game game,
             Texture2D texture,
             int frames) : base(game)
         {
-            Texture = Texture;
-            int width = Texture.Width / frames;
+            this.texture = texture;
+            int width = texture.Width / frames;
             Rectangles = new Rectangle[frames];
 
             for (int i = 0; i < frames; i++)
-                Rectangles[i] = new Rectangle(i * width, 0, width, Texture.Height);
+                Rectangles[i] = new Rectangle(i * width, 0, width, texture.Height);
         }
 
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(Texture, Position, Rectangles[FrameIndex], Color, Rotation, Origin, Scale, SpriteEffect, 0f);
+            spriteBatch.Draw(this.texture, Position, Rectangles[FrameIndex], Color, Rotation, Origin, Scale, SpriteEffect, 0f);
             spriteBatch.End();
             base.Draw(gameTime);
         }

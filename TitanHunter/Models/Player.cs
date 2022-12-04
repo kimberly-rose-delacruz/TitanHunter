@@ -156,7 +156,7 @@ namespace TitanHunter.Models
         {
             if(this.gameWonSoundEffect !=null)
             {
-                this.gameWonSoundEffect.Play();
+                 this.gameWonSoundEffect.Play();
             }
         }
 

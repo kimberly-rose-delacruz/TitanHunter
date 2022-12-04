@@ -34,7 +34,7 @@ namespace TitanHunter.Scenes
             components.Add(player);
             components.Add(new EnemyManager(mainGame));
             components.Add(new CollisionManager(mainGame, player));
-            components.Add(new HeaderComponent(mainGame));
+            components.Add(new HeaderComponent(mainGame, player));
         }
 
         public override void Update(GameTime gameTime)

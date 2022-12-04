@@ -21,6 +21,7 @@ namespace TitanHunter.Services
         public int currentTotalEnemyCount = TOTAL_ENEMY_COUNT;
         private bool isGameOver = false;
         private bool isGameReset = false;
+        private bool isNewScoreAdded = false;
         public int TotalEnemyKilled { get; private set; }
         public int TotalDestroyedMeteor { get; private set; }
 
@@ -37,6 +38,8 @@ namespace TitanHunter.Services
             currentTotalEnemyCount = TOTAL_ENEMY_COUNT;
             TotalEnemyKilled = 0;
             TotalDestroyedMeteor = 0;
+            isNewScoreAdded = false;
+            meteorResetTimeValue = 1.5D;
         }
 
         public bool IsGameReset()
@@ -46,14 +49,14 @@ namespace TitanHunter.Services
                 //set again to false to restart the game again.
                 isGameReset = false;
                 return true;
+                
             }
 
             return isGameReset;
         }
 
         public bool IsGameOver()
-        {
-            
+        {          
             return isGameOver;
         }
 
@@ -61,7 +64,11 @@ namespace TitanHunter.Services
         {
             if(TotalEnemyKilled == TOTAL_ENEMY_COUNT)
             {
-                AddScore();
+               if(isNewScoreAdded == false)
+                {
+                    AddScore();
+                }
+
                 return true;
             }
 
@@ -71,14 +78,16 @@ namespace TitanHunter.Services
         
         public void AddScore()
         {
+
+            int playerNoScore = 0;
             DateTime gamePlayTime = DateTime.Now;
             var newScore = new Score();
             newScore.PlayTime = gamePlayTime;
             newScore.PlayerTotalScore = TotalEnemyKilled + TotalDestroyedMeteor;
-            scores.Add(newScore);
 
-             //getting current player high score from the list of scores by using Max function.
-            var currentHighScore = scores.Max(s => s.PlayerTotalScore);
+            //getting current player high score from the list of scores by using Max function.
+             var currentHighScore = scores.Count== 0 ? playerNoScore : 
+                scores.Max(s => s.PlayerTotalScore);
 
 
             if(newScore.PlayerTotalScore > currentHighScore)
@@ -87,12 +96,20 @@ namespace TitanHunter.Services
                 HasNewHighScore = true;
             }
 
+            scores.Add(newScore);
+             isNewScoreAdded = true;
+
         }
 
         //If player Is Dead then add score and set isGameOver to true.
         public void PlayerIsDead()
         {
              isGameOver = true;
+
+            if (isNewScoreAdded == false)
+            {
+                AddScore();
+            }
         }
 
         public bool ThrowMeteors(GameTime gameTime)
@@ -102,6 +119,13 @@ namespace TitanHunter.Services
             if(meteorTimer <= 0)
             {
                 meteorTimer = meteorResetTimeValue;
+                
+                //this serves that not killing all titans within the field will make the meteor throw even more fast by resetting
+                if(meteorResetTimeValue > 0.5D)
+                {
+                    meteorResetTimeValue -= 0.1D;
+                }
+
                 return true;
             }
 
