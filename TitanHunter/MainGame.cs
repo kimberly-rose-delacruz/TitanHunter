@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using TitanHunter.Scenes;
 using TitanHunter.Services;
 using TitanHunter;
+using Microsoft.Xna.Framework.Media;
 
 namespace TitanHunter
 {
@@ -11,6 +12,7 @@ namespace TitanHunter
     {
         private GraphicsDeviceManager _graphics;
         public SpriteBatch _spriteBatch;
+
         //declaring all scenes here.
         public StartScene startScene;
         public ActionScene actionScene;
@@ -32,8 +34,6 @@ namespace TitanHunter
         protected override void Initialize()
         {
 
-            // TODO: Add your initialization logic here
-
             Shared.stage = new Vector2(_graphics.PreferredBackBufferWidth,
                  _graphics.PreferredBackBufferHeight);
 
@@ -43,8 +43,6 @@ namespace TitanHunter
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
 
             //startScene
             startScene = new StartScene(this);
@@ -58,6 +56,7 @@ namespace TitanHunter
             //helpscene
             helpscene = new HelpScene(this);
             this.Components.Add(helpscene);
+
 
         }
 
@@ -78,15 +77,15 @@ namespace TitanHunter
         protected override void Update(GameTime gameTime)
         {
             int selectedIndex = 0;
+
             KeyboardState keyboardState = Keyboard.GetState();
-            // TODO: Add your update logic here
 
             if (startScene.Enabled)
             {
                 selectedIndex = startScene.Menu.selectedIndex;
                 if (selectedIndex == 0 && (keyboardState.IsKeyDown(Keys.Enter) && oldKeyboardState.IsKeyUp(Keys.Enter)))
                 {
-                    if (gameLevelService.IsGameOver() == true)
+                    if (gameLevelService.IsGameOver() == true || gameLevelService.IsGameWon() == true)
                     {
                         gameLevelService.Reset();
                     }

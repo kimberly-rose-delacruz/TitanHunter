@@ -22,8 +22,6 @@ namespace TitanHunter
 
         public int selectedIndex { get; set; }
 
-        private KeyboardState previousState;
-
         public MenuComponent(MainGame game,
             SpriteBatch spriteBatch,
             SpriteFont regularFont,

@@ -12,6 +12,7 @@ namespace TitanHunter.Models
     {
         public PlayerProjectile(MainGame mainGame, Vector2 newPosition) : base(mainGame, newPosition)
         {
+
         }
     }
 }

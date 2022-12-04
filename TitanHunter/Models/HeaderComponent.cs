@@ -13,18 +13,20 @@ namespace TitanHunter.Models
     public class HeaderComponent : DrawableGameComponent
     {
         public const int HEADER_HEIGHT = 85;
-        private const int LINE_SPACING = 10;
+        private const int GAP_SPACE = 10;
         private string gameOverText = "GAME OVER";
         private string returnToHomeText = "Press [ENTER] to go back to menu.";
         private string totalScoreText = "Total Score: ";
         private string killedTitanScoreText = "Titan Score: ";
         private string destroyedMeteorScoreText = "Meteor Score: ";
-        
+        private string gameWonText = "CONGRATULATIONS! YOU WON";
+        private string goToHighScorePageText = "Press [ENTER] to see high score.";
 
         private MainGame mainGame;
         private GameLevelService gameLevelService;
 
         SpriteFont gameOverFont;
+        SpriteFont gameWonFont;
         SpriteFont returnToHomeFont;
         SpriteFont totalScoreFont;
         SpriteFont killedTitanScoreFont;
@@ -32,6 +34,7 @@ namespace TitanHunter.Models
 
         Texture2D scoreboardTexture;
         Vector2 gameOverPosition;
+        Vector2 gameWonPosition;
         Vector2 returnToHomePosition;
         Vector2 totalScorePosition;
         Vector2 killedTitanScorePosition;
@@ -54,7 +57,11 @@ namespace TitanHunter.Models
             killedTitanScoreFont= mainGame.Content.Load<SpriteFont>("fonts/small");
             destroyedMeteorScoreFont = mainGame.Content.Load<SpriteFont>("fonts/small");
             scoreboardTexture = mainGame.Content.Load<Texture2D>("images/scoreboard");
+            gameWonFont = mainGame.Content.Load<SpriteFont>("fonts/mediumBold");
+
         }
+
+
 
         public override void Draw(GameTime gameTime)
         {
@@ -65,7 +72,9 @@ namespace TitanHunter.Models
             killedTitanScorePosition = killedTitanScoreFont.MeasureString(killedTitanScoreText);
             destroyedMeteorScorePosition = destroyedMeteorScoreFont.MeasureString(destroyedMeteorScoreText);
             int totalScore = gameLevelService.TotalEnemyKilled + gameLevelService.TotalDestroyedMeteor;
-            
+            gameWonPosition = gameWonFont.MeasureString(gameWonText);
+
+
             mainGame._spriteBatch.Begin();
             mainGame._spriteBatch.Draw(scoreboardTexture, new Vector2(0, 0), Color.White);
 
@@ -77,12 +86,19 @@ namespace TitanHunter.Models
 
                 mainGame._spriteBatch.DrawString(returnToHomeFont, returnToHomeText, new Vector2(Shared.stage.X / 2 - returnToHomePosition.X / 2, HEADER_HEIGHT / 2), Color.White);
             }
+            
+            if(gameLevelService.IsGameWon() == true)
+            {
+                //draw gameWon here.
+                mainGame._spriteBatch.DrawString(gameWonFont, gameWonText, new Vector2(Shared.stage.X / 2 - returnToHomePosition.X / 2, HEADER_HEIGHT / 2), Color.White);
 
-            mainGame._spriteBatch.DrawString(totalScoreFont, totalScoreText  + totalScore.ToString(), new Vector2(LINE_SPACING+ LINE_SPACING, LINE_SPACING), Color.White);
+            }
 
-            mainGame._spriteBatch.DrawString(killedTitanScoreFont, killedTitanScoreText + gameLevelService.TotalEnemyKilled.ToString() + "/" + GameLevelService.TOTAL_ENEMY_COUNT, new Vector2(LINE_SPACING + LINE_SPACING, totalScorePosition.Y/2 + totalScorePosition.Y), Color.White);
+            mainGame._spriteBatch.DrawString(totalScoreFont, totalScoreText  + totalScore.ToString(), new Vector2(GAP_SPACE * 2, GAP_SPACE), Color.White);
 
-            mainGame._spriteBatch.DrawString(destroyedMeteorScoreFont, destroyedMeteorScoreText + gameLevelService.TotalDestroyedMeteor.ToString(), new Vector2(LINE_SPACING+LINE_SPACING,killedTitanScorePosition.Y + totalScorePosition.Y + LINE_SPACING), Color.White);
+            mainGame._spriteBatch.DrawString(killedTitanScoreFont, killedTitanScoreText + gameLevelService.TotalEnemyKilled.ToString() + "/" + GameLevelService.TOTAL_ENEMY_COUNT, new Vector2(GAP_SPACE * 2, totalScorePosition.Y/2 + totalScorePosition.Y), Color.White);
+
+            mainGame._spriteBatch.DrawString(destroyedMeteorScoreFont, destroyedMeteorScoreText + gameLevelService.TotalDestroyedMeteor.ToString(), new Vector2(GAP_SPACE * 2, killedTitanScorePosition.Y + totalScorePosition.Y + GAP_SPACE), Color.White);
 
             mainGame._spriteBatch.End();
 

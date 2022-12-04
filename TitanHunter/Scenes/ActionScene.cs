@@ -47,8 +47,10 @@ namespace TitanHunter.Scenes
                 player.Reset();
             }
 
-            if (mainGame.gameLevelService.IsGameOver()) { return; }
+            //if game over or game won stop everything.
+            if (mainGame.gameLevelService.IsGameOver() || mainGame.gameLevelService.IsGameWon() == true) { return; }
 
+            
             foreach (Projectile proj in Projectile.projectiles)
             {
                 proj.Update(gameTime);
@@ -69,7 +71,6 @@ namespace TitanHunter.Scenes
             mainGame._spriteBatch.Draw(actionBackgroundTex, position, Color.White);
             foreach (Projectile proj in Projectile.projectiles)
             {
-                //spriteBatch.Draw(shuriken, new Vector2(proj.Position.X, proj.Position.Y), Color.White);
                 proj.Draw(gameTime);
             }
 

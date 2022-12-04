@@ -26,8 +26,8 @@ namespace TitanHunter.Controllers
 
         public override void Update(GameTime gameTime)
         {
-            //all update will stop when player is dead.
-            if (mainGame.gameLevelService.IsGameOver()) { return; }
+            //all update will stop when player is dead or won.
+            if (mainGame.gameLevelService.IsGameOver() || mainGame.gameLevelService.IsGameWon() == true) { return; }
 
             if (gameLevelService.ThrowMeteors(gameTime) == true)
             {

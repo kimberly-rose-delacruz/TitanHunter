@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +15,7 @@ namespace TitanHunter.Models
         private float timeElapsed;
         public bool IsLooping = true;
         private float timeToUpdate;
+
         public int FramesPerSecond { set { timeToUpdate = 1f / value; } }
 
         public SpriteAnimation(Game game, Texture2D Texture, int frames, int fps) : base(game, Texture, frames)

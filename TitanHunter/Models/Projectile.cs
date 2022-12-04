@@ -96,7 +96,7 @@ namespace TitanHunter.Models
             base.Draw(gameTime);
         }
 
-        public Rectangle getBounds()
+        public Rectangle GetProjectileBounds()
         {
 
             return new Rectangle((int)this.position.X, (int)this.position.Y, this.projectileTexture.Width, this.projectileTexture.Height);
@@ -104,6 +104,7 @@ namespace TitanHunter.Models
 
         public virtual void PlayCollisionSoundEffect()
         {
+            //the collission will only play if the implementing class sets the collision soundeffect.
             if (this.collisionSoundEffect != null)
             {
 

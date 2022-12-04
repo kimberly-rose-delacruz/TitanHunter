@@ -27,6 +27,8 @@ namespace TitanHunter.Models
 
         private SoundEffect collisionSoundEffect;
 
+        private SoundEffect gameWonSoundEffect;
+
         private GameLevelService gameLevelService;
 
         private Texture2D killTexture;
@@ -39,13 +41,11 @@ namespace TitanHunter.Models
             this.mainGame = game;
             this.gameLevelService = game.gameLevelService;
             InitializeTexture();
-
+            InitializeSoundEffect();
             xMovementSpeed = new Vector2(4, 0);
             yMovementSpeed = new Vector2(0, 4);
             this.position = new Vector2(Shared.stage.X / 8 - playerTexture.Width / 2, Shared.stage.Y / 2 - playerTexture.Height / 2);
 
-            collisionSoundEffect = mainGame.Content.Load<SoundEffect>("sounds/gameover");
-            
         }
 
         public void InitializeTexture()
@@ -55,6 +55,12 @@ namespace TitanHunter.Models
 
         }
 
+        public void InitializeSoundEffect()
+        {
+            collisionSoundEffect = mainGame.Content.Load<SoundEffect>("sounds/gameover");
+            gameWonSoundEffect = mainGame.Content.Load<SoundEffect>("sounds/gamewon");
+        }
+
         public void Reset()
         {
             this.position = new Vector2(Shared.stage.X / 8 - playerTexture.Width / 2, Shared.stage.Y / 2 - playerTexture.Height / 2);
@@ -62,6 +68,7 @@ namespace TitanHunter.Models
 
         public override void Update(GameTime gameTime)
         {
+
             KeyboardState keyboardState = Keyboard.GetState();
             isMoving = false;
 
@@ -124,12 +131,13 @@ namespace TitanHunter.Models
             {
                 mainGame._spriteBatch.Draw(killTexture, new Vector2(killHitPoint.X-killTexture.Width/2, killHitPoint.Y-killTexture.Height/2), Color.White);
             }
+
             mainGame._spriteBatch.End();
             base.Draw(gameTime);
         }
 
 
-        public Rectangle getBounds()
+        public Rectangle GetPlayerBounds()
         {
 
             return new Rectangle((int)this.position.X, (int)this.position.Y, this.playerTexture.Width, this.playerTexture.Height);
@@ -144,11 +152,28 @@ namespace TitanHunter.Models
             }
         }
 
+        public void PlayGameWonSoundEffect()
+        {
+            if(this.gameWonSoundEffect !=null)
+            {
+                this.gameWonSoundEffect.Play();
+            }
+        }
+
         public void Kill(Rectangle hitPoint)
         {
             killHitPoint = hitPoint;
             gameLevelService.PlayerIsDead();
             PlayCollisionSoundEffect();        
         }
+
+        public void GameEnd()
+        {
+            if(gameLevelService.IsGameWon() == true)
+            {
+                PlayGameWonSoundEffect();
+            }
+        }
+
     }
 }

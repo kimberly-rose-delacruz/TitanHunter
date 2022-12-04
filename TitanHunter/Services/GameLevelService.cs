@@ -24,6 +24,9 @@ namespace TitanHunter.Services
         public int TotalEnemyKilled { get; private set; }
         public int TotalDestroyedMeteor { get; private set; }
 
+        public bool HasNewHighScore { get; private set; }
+
+        public List<Score> scores = new List<Score>();
         
         //game resetting
         public void Reset()
@@ -54,15 +57,42 @@ namespace TitanHunter.Services
             return isGameOver;
         }
 
-        public void PlayerIsDead()
+        public bool IsGameWon()
         {
-            isGameOver = true;
+            if(TotalEnemyKilled == TOTAL_ENEMY_COUNT)
+            {
+                AddScore();
+                return true;
+            }
+
+            return false;
         }
 
-        public int GetCurrentGameLevel()
+        
+        public void AddScore()
         {
+            DateTime gamePlayTime = DateTime.Now;
+            var newScore = new Score();
+            newScore.PlayTime = gamePlayTime;
+            newScore.PlayerTotalScore = TotalEnemyKilled + TotalDestroyedMeteor;
+            scores.Add(newScore);
 
-            return 1;
+             //getting current player high score from the list of scores by using Max function.
+            var currentHighScore = scores.Max(s => s.PlayerTotalScore);
+
+
+            if(newScore.PlayerTotalScore > currentHighScore)
+            {
+                //access this boolean in the gamescenes if there is a new high score.
+                HasNewHighScore = true;
+            }
+
+        }
+
+        //If player Is Dead then add score and set isGameOver to true.
+        public void PlayerIsDead()
+        {
+             isGameOver = true;
         }
 
         public bool ThrowMeteors(GameTime gameTime)

@@ -211,18 +211,6 @@
 /processorParam:TextureFormat=Color
 /build:images/scoreboard.png
 
-#begin images/scoreboard.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:images/scoreboard.png
-
 #begin images/shuriken.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -247,6 +235,12 @@
 /processorParam:TextureFormat=Color
 /build:images/spacebar.png
 
+#begin sounds/backgroundmusic.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sounds/backgroundmusic.mp3
+
 #begin sounds/fire.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -258,6 +252,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sounds/gameover.wav
+
+#begin sounds/gamewon.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/gamewon.wav
 
 #begin sounds/low-explosion.wav
 /importer:WavImporter

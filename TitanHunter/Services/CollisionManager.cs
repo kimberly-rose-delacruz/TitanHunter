@@ -34,7 +34,7 @@ namespace TitanHunter.Services
                 {
                     var currentMeteor = meteors[i];
 
-                    if (projectile.getBounds().Intersects(currentMeteor.getBounds()))
+                    if (projectile.GetProjectileBounds().Intersects(currentMeteor.GetProjectileBounds()))
                     {
                         currentMeteor.Destroy();
                         Projectile.projectiles.Remove(currentMeteor);
@@ -47,7 +47,7 @@ namespace TitanHunter.Services
                 for (int i = 0; i < enemies.Count; i++)
                 {
                     var currentEnemy = enemies[i];
-                    if(projectile.getBounds().Intersects(currentEnemy.getEnemyBounds()))
+                    if(projectile.GetProjectileBounds().Intersects(currentEnemy.getEnemyBounds()))
                     {
                         currentEnemy.PlayCollisionSoundEffect();
                         currentEnemy.Kill();
@@ -65,19 +65,14 @@ namespace TitanHunter.Services
             for (int i = 0; i < enemyProjectile.Count; i++)
             {
                 var currentEnemy = enemyProjectile[i];
-                var playerBounds = player.getBounds();
-                var currentEnemyBounds = currentEnemy.getBounds();
+                var playerBounds = player.GetPlayerBounds();
+                var currentEnemyBounds = currentEnemy.GetProjectileBounds();
 
 
                 if(playerBounds.Intersects(currentEnemyBounds))
                 {
                     Rectangle.Intersect(ref playerBounds, ref currentEnemyBounds, out Rectangle hitPoint);
                     player.Kill(hitPoint);
-                    
-                    //stop all the objects within the field. 
-                    //gameOverScene show
-                    //clicking escape or enter to restart the game.
-                    //add the score in the highscore list.
                 }
             }
 
