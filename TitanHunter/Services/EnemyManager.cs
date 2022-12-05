@@ -16,7 +16,7 @@ namespace TitanHunter.Controllers
     {
         static Random rand = new Random();
         private MainGame mainGame;
-        private GameLevelService gameLevelService;
+        private GameManager gameLevelService;
 
         public EnemyManager(MainGame game) : base(game)
         {

@@ -13,13 +13,13 @@ namespace TitanHunter.Models
     public class PlayerAnimation : PlayerManager
     {
         private float timeElapsed;
-        public bool IsLooping = true;
+        public bool isLooping = true;
         private float timeToUpdate;
-
         public int FramesPerSecond { set { timeToUpdate = 1f / value; } }
-
-        public PlayerAnimation(Game game, Texture2D Texture, int frames, int fps) : base(game, Texture, frames)
+        private MainGame mainGame;
+        public PlayerAnimation(MainGame game, Texture2D Texture, int frames, int fps) : base(game, Texture, frames)
         {
+            this.mainGame = game;
             FramesPerSecond = fps;
         }
 
@@ -33,7 +33,7 @@ namespace TitanHunter.Models
                 if (FrameIndex < Rectangles.Length - 1)
                     FrameIndex++;
 
-                else if (IsLooping)
+                else if (isLooping)
                     FrameIndex = 0;
             }
 

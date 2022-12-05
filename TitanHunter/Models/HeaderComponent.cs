@@ -25,7 +25,7 @@ namespace TitanHunter.Models
         private string goToHighScorePageText = "Press [ENTER] to see high score.";
 
         private MainGame mainGame;
-        private GameLevelService gameLevelService;
+        private GameManager gameLevelService;
         private Player player;
 
         SpriteFont gameOverFont;
@@ -114,7 +114,7 @@ namespace TitanHunter.Models
 
             mainGame._spriteBatch.DrawString(totalScoreFont, totalScoreText  + totalScore.ToString(), new Vector2(GAP_SPACE * 2, GAP_SPACE), Color.White);
 
-            mainGame._spriteBatch.DrawString(killedTitanScoreFont, killedTitanScoreText + gameLevelService.TotalEnemyKilled.ToString() + "/" + GameLevelService.TOTAL_ENEMY_COUNT, new Vector2(GAP_SPACE * 2, totalScorePosition.Y/2 + totalScorePosition.Y), Color.White);
+            mainGame._spriteBatch.DrawString(killedTitanScoreFont, killedTitanScoreText + gameLevelService.TotalEnemyKilled.ToString() + "/" + GameManager.TOTAL_ENEMY_COUNT, new Vector2(GAP_SPACE * 2, totalScorePosition.Y/2 + totalScorePosition.Y), Color.White);
 
             mainGame._spriteBatch.DrawString(destroyedMeteorScoreFont, destroyedMeteorScoreText + gameLevelService.TotalDestroyedMeteor.ToString(), new Vector2(GAP_SPACE * 2, killedTitanScorePosition.Y + totalScorePosition.Y + GAP_SPACE), Color.White);
 

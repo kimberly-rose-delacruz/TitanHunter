@@ -66,6 +66,7 @@ namespace TitanHunter
             Vector2 temporaryPosition = position;
 
             mainGame._spriteBatch.Begin();
+
             //this is to draw all the menu items in the background.
             for (int i = 0; i < menuItems.Count; i++)
             {

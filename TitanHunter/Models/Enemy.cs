@@ -39,9 +39,6 @@ namespace TitanHunter.Models
             {
                 position.Y = HeaderComponent.HEADER_HEIGHT;
             }    
-
-
-
     
             this.position = position;
 

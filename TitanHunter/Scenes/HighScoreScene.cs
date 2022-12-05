@@ -15,7 +15,7 @@ namespace TitanHunter.Scenes
     {
         private MainGame mainGame;
         private List<Score> highScores;
-        private const string TABLE_HEADER_TITLE = "Rank         Score          GameTime";
+        private const string TABLE_HEADER_TITLE = "Rank         Score          Game Time";
         private const int GAP_SPACE = 40;
         private const int X_POSITION = 0;
         private const int Y_POSITION = 0;
@@ -23,19 +23,20 @@ namespace TitanHunter.Scenes
         private string highScoreTitle = "High Score";
 
         Texture2D highScoreBackgroundTexture;
-
+        Texture2D rankingThropyTexture;
         Vector2 fontPosition;
         Vector2 highScoreTitlePosition;
 
         SpriteFont regularFont;
         SpriteFont highScoreTitleFont;
+        private Color textColor = Color.White;
 
 
         public HighScoreScene(MainGame game) : base(game)
         {
             this.mainGame = game;
             InitializeResources();
-            fontPosition = new Vector2(GAP_SPACE, Shared.stage.Y);
+            fontPosition = new Vector2(GAP_SPACE, Shared.stage.Y/3);
             highScoreTitlePosition = new Vector2(ADJUSTEDTEXT_X_POSITION, Y_POSITION);
             highScoreTitlePosition = new Vector2(ADJUSTEDTEXT_X_POSITION, Y_POSITION);
 
@@ -46,6 +47,7 @@ namespace TitanHunter.Scenes
             highScoreBackgroundTexture = mainGame.Content.Load<Texture2D>("images/HelpBackground");
             regularFont = mainGame.Content.Load<SpriteFont>("fonts/medium");
             highScoreTitleFont = mainGame.Content.Load<SpriteFont>("fonts/GameTitleFont");
+            rankingThropyTexture = mainGame.Content.Load<Texture2D>("images/throphy");
         }
 
         public override void Show()
@@ -61,19 +63,19 @@ namespace TitanHunter.Scenes
 
 
             mainGame._spriteBatch.Begin();
-            mainGame._spriteBatch.Draw(highScoreBackgroundTexture, new Vector2(X_POSITION, Y_POSITION), Color.White);
-            mainGame._spriteBatch.DrawString(highScoreTitleFont, highScoreTitle, highScoreTitlePosition, Color.White);
-            mainGame._spriteBatch.DrawString(regularFont, TABLE_HEADER_TITLE,
-    new Vector2(GAP_SPACE, Shared.stage.Y/3), Color.Gold);
+            mainGame._spriteBatch.Draw(highScoreBackgroundTexture, new Vector2(X_POSITION, Y_POSITION), textColor);
+
+            mainGame._spriteBatch.Draw(rankingThropyTexture, new Vector2(Shared.stage.X*0.60f, Shared.stage.Y*0.40f), textColor);
+            mainGame._spriteBatch.DrawString(highScoreTitleFont, highScoreTitle, highScoreTitlePosition, textColor);
+            mainGame._spriteBatch.DrawString(regularFont, TABLE_HEADER_TITLE, new Vector2(GAP_SPACE, Shared.stage.Y/3), Color.Gold);
 
             for (int i = 0; i < highScores.Count; i++)
             {
                 var score = highScores[i];
                 var totalScore = score.PlayerTotalScore.ToString().PadLeft(5, '0');
 
-                mainGame._spriteBatch.DrawString(regularFont, $"     {i + 1}           {totalScore}           {score.PlayTime.ToLongTimeString()}",
-                    new Vector2(GAP_SPACE, temporaryPosition.Y / 3 + regularFont.LineSpacing), Color.White);
-                temporaryPosition.Y += regularFont.LineSpacing;
+                mainGame._spriteBatch.DrawString(regularFont, $"     {i + 1}           {totalScore}           {score.PlayTime.ToLongTimeString()}",new Vector2(GAP_SPACE, temporaryPosition.Y + regularFont.LineSpacing), textColor);
+                temporaryPosition.Y+= regularFont.LineSpacing;
 
             }
             mainGame._spriteBatch.End();

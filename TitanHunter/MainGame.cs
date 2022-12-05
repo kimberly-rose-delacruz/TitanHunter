@@ -5,6 +5,7 @@ using TitanHunter.Scenes;
 using TitanHunter.Services;
 using TitanHunter;
 using Microsoft.Xna.Framework.Media;
+using MobsHunterGame.Scenes;
 
 namespace TitanHunter
 {
@@ -16,9 +17,10 @@ namespace TitanHunter
         //declaring all scenes here.
         public StartScene startScene;
         public ActionScene actionScene;
-        public GameLevelService gameLevelService;
+        public GameManager gameLevelService;
         public HelpScene helpscene;
         public HighScoreScene highSCoreScene;
+        public AboutScene aboutScene;
         private KeyboardState oldKeyboardState = Keyboard.GetState();
 
 
@@ -29,7 +31,7 @@ namespace TitanHunter
             IsMouseVisible = true;
             _graphics.PreferredBackBufferWidth = 1000;
             _graphics.PreferredBackBufferHeight = 633;
-            gameLevelService = new GameLevelService();
+            gameLevelService = new GameManager();
         }
 
         protected override void Initialize()
@@ -61,7 +63,8 @@ namespace TitanHunter
             highSCoreScene = new HighScoreScene(this);
             this.Components.Add(highSCoreScene);
 
-
+            aboutScene = new AboutScene(this);
+            this.Components.Add(aboutScene);
         }
 
 
@@ -107,6 +110,11 @@ namespace TitanHunter
                     HideAllScenes();
                     highSCoreScene.Show();
                 }
+                else if(selectedIndex == 3 && keyboardState.IsKeyDown(Keys.Enter))
+                {
+                    HideAllScenes();
+                    aboutScene.Show();
+                }
                 else if (selectedIndex == 4 && keyboardState.IsKeyDown(Keys.Enter))
                 {
                     Exit();
@@ -126,7 +134,7 @@ namespace TitanHunter
                 }
             }
 
-            else if(helpscene.Enabled || highSCoreScene.Enabled)
+            else if(helpscene.Enabled || highSCoreScene.Enabled || aboutScene.Enabled)
             {
                 if (keyboardState.IsKeyDown(Keys.Escape)) 
                 {

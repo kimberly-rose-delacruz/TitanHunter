@@ -12,7 +12,6 @@ namespace TitanHunter.Services
 {
     public class PlayerManager : DrawableGameComponent
     {
-        SpriteBatch spriteBatch;
         protected Texture2D texture;
         public Vector2 Position = Vector2.Zero;
         public Color Color = Color.White;
@@ -22,12 +21,13 @@ namespace TitanHunter.Services
         public SpriteEffects SpriteEffect;
         protected Rectangle[] Rectangles;
         protected int FrameIndex = 0;
+        private MainGame mainGame;
 
-
-        public PlayerManager(Game game,
+        public PlayerManager(MainGame game,
             Texture2D texture,
             int frames) : base(game)
         {
+            this.mainGame = game;
             this.texture = texture;
             int width = texture.Width / frames;
             Rectangles = new Rectangle[frames];
@@ -38,9 +38,7 @@ namespace TitanHunter.Services
 
         public override void Draw(GameTime gameTime)
         {
-            spriteBatch.Begin();
-            spriteBatch.Draw(this.texture, Position, Rectangles[FrameIndex], Color, Rotation, Origin, Scale, SpriteEffect, 0f);
-            spriteBatch.End();
+            mainGame._spriteBatch.Draw(this.texture, Position, Rectangles[FrameIndex], Color, Rotation, Origin, Scale, SpriteEffect, 0f);
             base.Draw(gameTime);
         }
     }

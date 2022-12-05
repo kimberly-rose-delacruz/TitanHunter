@@ -27,8 +27,8 @@ namespace TitanHunter.Scenes
         {
             this.mainGame = game;
             //background loading content and giving its position in the action scene
-            actionBackgroundTex = mainGame.Content.Load<Texture2D>("images/DungeonBackground");
             position = new Vector2(X_POSITION, Y_POSITION);
+            actionBackgroundTex = mainGame.Content.Load<Texture2D>("images/DungeonBackground");
 
             player = new Player(game);
             components.Add(player);
