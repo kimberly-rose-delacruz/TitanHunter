@@ -10,7 +10,6 @@ using Microsoft.Xna.Framework.Input;
 using TitanHunter.Controllers;
 using TitanHunter.Models;
 using TitanHunter.Services;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Taskbar;
 
 
 namespace TitanHunter.Scenes
@@ -29,14 +28,18 @@ namespace TitanHunter.Scenes
 
             //background loading content and giving its position in the action scene
             position = new Vector2(X_POSITION, Y_POSITION);
-
-            actionBackgroundTex = mainGame.Content.Load<Texture2D>("images/DungeonBackground");
-
+            InitializeResources();
             player = new Player(game);
             components.Add(player);
             components.Add(new EnemyManager(mainGame));
             components.Add(new CollisionManager(mainGame, player));
             components.Add(new HeaderComponent(mainGame, player));
+        }
+
+        public void InitializeResources()
+        {
+            actionBackgroundTex = mainGame.Content.Load<Texture2D>("images/DungeonBackground");
+
         }
 
         public override void Update(GameTime gameTime)

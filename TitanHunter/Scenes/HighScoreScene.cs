@@ -1,18 +1,19 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TitanHunter.Models;
-using TitanHunter.Services;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace TitanHunter.Scenes
 {
     public class HighScoreScene : GameScene
     {
+        //declaring global variables.
         private MainGame mainGame;
         private List<Score> highScores;
         private const string TABLE_HEADER_TITLE = "Rank         Score          Game Time";

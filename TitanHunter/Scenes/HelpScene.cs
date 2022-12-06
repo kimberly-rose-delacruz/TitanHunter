@@ -1,4 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿/*HelpScene.cs 
+ *      the purpose of this scene is to show the objective, the purpose, and its controllers to help the players know how to play the game and how to win on it.
+ *      
+ *  Revision History:
+ *      Created on December 6, 2022 By Kimberly Rose Dela Cruz
+ */
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -11,6 +18,7 @@ namespace TitanHunter.Scenes
 {
     public class HelpScene : GameScene
     {
+        //declare global variables
         private MainGame mainGame;
         private Texture2D helpSceneTexture;
         private Vector2 backgroundPosition;
@@ -29,9 +37,7 @@ namespace TitanHunter.Scenes
 
         private string helpTitle = "Help";
         private string purposeText = "To protect humanity from perishing, we must fight all titans \n and regain our freedom.";
-
-        private string objectiveText = "Objective: Kill all titans in the field to win the game. Destroy many meteors as much as \n you can but remember the longer titan lives the harder to kill them all. \nHigher number of meteors and titans killed will be the high score.";
-
+        private string objectiveText = "Objective: Kill all titans in the field to win the game. Destroy many meteors \nas much as you can but remember the longer titan lives the harder to kill them all. \nHigher number of meteors and titans killed will be the high score.";
         private string actionKeyInstruction = "Use up, down, left, and right to move the player.";
         private string projectileInstruction = "Use spacebar to throw shurikens towards enemies to kill them.";
         private string escapeInstruction = "Use escape to return to home menu.";
@@ -53,10 +59,9 @@ namespace TitanHunter.Scenes
 
         SpriteFont helpTitleFont;
         SpriteFont instructionFont;
-
-
         private Color textColor = Color.White;
 
+        //initializing each position of the text and its images to displayed in the helpscene. It's kinda ugly but I just created this way to save time and plot all text and images accordingly.
         public HelpScene(MainGame game) : base(game)
         {
             mainGame = game;
@@ -73,6 +78,7 @@ namespace TitanHunter.Scenes
             escapeTextPosition = new Vector2(projectileInstructionTexture.Width + OBJECTIVE_X_POSITION, ESCAPEKEY_Y_POSITION);
         }
 
+        //created function to be used in the constructor to load all resources for each image and font types needed for helpscene.
         public void InitializeResources()
         {
             helpSceneTexture = mainGame.Content.Load<Texture2D>("images/HelpBackground");
@@ -83,6 +89,7 @@ namespace TitanHunter.Scenes
             escapeInstructionTexture = mainGame.Content.Load<Texture2D>("images/escapeKey");
         }
 
+        //using the mainGame drawing the spritebatch for each of the resource in the helpscene accotding to its position, fonts, textures, and colors.
         public override void Draw(GameTime gameTime)
         {
             mainGame._spriteBatch.Begin();
