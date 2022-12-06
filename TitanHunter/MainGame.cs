@@ -121,16 +121,24 @@ namespace TitanHunter
                 }
             }
 
-
-
             //any of the scene is enabled can do escape from the current scene and return back to the startscene to show it.
             else if (actionScene.Enabled)
             {
                 if (keyboardState.IsKeyDown(Keys.Escape) || 
                     (keyboardState.IsKeyDown(Keys.Enter) && oldKeyboardState.IsKeyUp(Keys.Enter)))
                 {
-                    HideAllScenes();
-                    startScene.Show();
+
+                    if (gameLevelService.HasNewHighScore == true)
+                    {
+                        HideAllScenes();
+                        highSCoreScene.Show();
+                    }
+                    else
+                    {
+                        HideAllScenes();
+                        startScene.Show();
+                    }    
+
                 }
             }
 
