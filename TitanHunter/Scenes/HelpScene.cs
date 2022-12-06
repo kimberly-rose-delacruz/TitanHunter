@@ -76,10 +76,8 @@ namespace TitanHunter.Scenes
         public void InitializeResources()
         {
             helpSceneTexture = mainGame.Content.Load<Texture2D>("images/HelpBackground");
-
             helpTitleFont = mainGame.Content.Load<SpriteFont>("fonts/GameTitleFont");
             instructionFont = mainGame.Content.Load<SpriteFont>("fonts/small");
-
             actionKeyInstructionTexture = mainGame.Content.Load<Texture2D>("images/keyboard");
             projectileInstructionTexture = mainGame.Content.Load<Texture2D>("images/spacebar");
             escapeInstructionTexture = mainGame.Content.Load<Texture2D>("images/escapeKey");

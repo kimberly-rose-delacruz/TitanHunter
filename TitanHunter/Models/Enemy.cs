@@ -30,9 +30,9 @@ namespace TitanHunter.Models
             InitializeTexture();
 
             //handle spawning of enemy if enemy height is greater than the stage height
-            if (position.Y > Shared.stage.Y - enemyTexture.Height)
+            if (position.Y > Shared.stage.Y - enemyTexture.Height - Shared.WALL_HEIGHT)
             {
-                position.Y = Shared.stage.Y - enemyTexture.Height;
+                position.Y = Shared.stage.Y - enemyTexture.Height - Shared.WALL_HEIGHT;
             }
 
             if(position.Y < HeaderComponent.HEADER_HEIGHT)

@@ -12,6 +12,7 @@ namespace TitanHunter
     {
         public static Vector2 stage;
         public const int SHARED_HEIGHT = 83;
+        public const int WALL_HEIGHT = 25;
     }
 
     public enum Dir

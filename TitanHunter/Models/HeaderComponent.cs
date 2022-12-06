@@ -88,22 +88,30 @@ namespace TitanHunter.Models
 
                 mainGame._spriteBatch.DrawString(mediumFont, gameOverText, new Vector2(Shared.stage.X / 2 - gameOverPosition.X / 2, 0), Color.White);
 
-                mainGame._spriteBatch.DrawString(mediumFont, returnToHomeText, new Vector2(Shared.stage.X / 2 - returnToHomePosition.X / 2, HEADER_HEIGHT / 2), Color.White);
+                if (gameLevelService.HasNewHighScore == true)
+                {
+                    mainGame._spriteBatch.DrawString(mediumFont, goToHighScorePageText, new Vector2(Shared.stage.X / 2 - returnToHomePosition.X / 2, HEADER_HEIGHT / 2), Color.White);
+                }
+                else
+                {
+                    mainGame._spriteBatch.DrawString(mediumFont, returnToHomeText, new Vector2(Shared.stage.X / 2 - returnToHomePosition.X / 2, HEADER_HEIGHT / 2), Color.White);
+                }
             }
-            
-            if(gameLevelService.IsGameWon() == true)
+
+
+            if (gameLevelService.IsGameWon() == true)
             {
                 //if the player wins it will displayed the congratulations status based if it's a new high score or not.
                 if(gameLevelService.HasNewHighScore == true)
                 {
                     mainGame._spriteBatch.DrawString(mediumFont, gameWonNewHighScoreText, new Vector2(Shared.stage.X / 2 - gameWonNewHighScorePosition.X / 2, 0), Color.White);
 
-                    mainGame._spriteBatch.DrawString(mediumFont, returnToHomeText, new Vector2(Shared.stage.X / 2 - returnToHomePosition.X / 2, HEADER_HEIGHT / 2), Color.White);
+                    mainGame._spriteBatch.DrawString(mediumFont, goToHighScorePageText, new Vector2(Shared.stage.X / 2 - returnToHomePosition.X / 2, HEADER_HEIGHT / 2), Color.White);
                 }
                 else
                 {
                     mainGame._spriteBatch.DrawString(mediumFont, gameWonText, new Vector2(Shared.stage.X / 2 - gameWonPosition.X / 2, 0), Color.White);
-                    mainGame._spriteBatch.DrawString(mediumFont, goToHighScorePageText, new Vector2(Shared.stage.X / 2 - returnToHomePosition.X / 2, HEADER_HEIGHT / 2), Color.White);
+                    mainGame._spriteBatch.DrawString(mediumFont, returnToHomeText, new Vector2(Shared.stage.X / 2 - returnToHomePosition.X / 2, HEADER_HEIGHT / 2), Color.White);
                 }
             }
 

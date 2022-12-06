@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using Color = Microsoft.Xna.Framework.Color;
 
 namespace TitanHunter.Scenes
@@ -24,19 +25,46 @@ namespace TitanHunter.Scenes
         Vector2 backgroundPosition;
         Vector2 gameTitlePosition;
         SpriteFont titleFont;
-        private Color regularColor = Color.Red;
+        private Color regularColor = Color.White;
+        SpriteFont regular;
+        SpriteFont highlight;
+        Song backgroundMusic;
 
         public StartScene(MainGame game) : base(game)
         {
             this.mainGame = game;
-            SpriteFont regular = mainGame.Content.Load<SpriteFont>("fonts/regular");
-            SpriteFont highlight = mainGame.Content.Load<SpriteFont>("fonts/highlight");
-            titleFont= mainGame.Content.Load<SpriteFont>("fonts/GameTitleFont");
-            backgroundTex = mainGame.Content.Load<Texture2D>("images/HomeBackground");
+            InitializeResources();
+
             Menu = new MenuComponent(game, spriteBatch, regular, highlight, menuItems);
             components.Add(Menu);
             backgroundPosition = new Vector2(0, 0);
-            gameTitlePosition = new Vector2(Shared.stage.X/3, Shared.stage.Y/3);
+            Vector2 titlePosition = titleFont.MeasureString(gameTitle);
+
+            gameTitlePosition = new Vector2(Shared.stage.X/2 - titlePosition.X/2, 0);
+            
+        }
+
+        public override void Show()
+        {
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(backgroundMusic);
+            base.Show();
+        }
+
+        public override void Hide()
+        {
+            MediaPlayer.Stop();
+            base.Hide();
+        }
+
+        public void InitializeResources()
+        {
+            regular = mainGame.Content.Load<SpriteFont>("fonts/regular");
+            highlight = mainGame.Content.Load<SpriteFont>("fonts/highlight");
+            titleFont = mainGame.Content.Load<SpriteFont>("fonts/GameTitleFont");
+            backgroundTex = mainGame.Content.Load<Texture2D>("images/HomeBackground");
+            backgroundMusic = mainGame.Content.Load<Song>("sounds/TitanHunterMusic");
+
         }
 
 

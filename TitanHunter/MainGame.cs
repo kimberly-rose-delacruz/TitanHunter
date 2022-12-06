@@ -65,6 +65,8 @@ namespace TitanHunter
 
             aboutScene = new AboutScene(this);
             this.Components.Add(aboutScene);
+
+            
         }
 
 

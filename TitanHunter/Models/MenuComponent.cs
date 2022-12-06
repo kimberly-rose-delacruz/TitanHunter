@@ -32,7 +32,7 @@ namespace TitanHunter
             this.regularFont = regularFont;
             this.highlightFont = highlightFont;
             menuItems = menus.ToList<string>();
-            position = new Vector2(Shared.stage.X / 2 -40, Shared.stage.Y/2);
+            position = new Vector2(Shared.stage.X * 0.75f, Shared.stage.Y*0.60f);
         }
 
         public override void Update(GameTime gameTime)

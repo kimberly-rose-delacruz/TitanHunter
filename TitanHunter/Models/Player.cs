@@ -114,7 +114,7 @@ namespace TitanHunter.Models
 
             if (keyboardState.IsKeyDown(Keys.Down))
             {
-                if (position.Y + playerTexture.Height < Shared.stage.Y)
+                if (position.Y + playerTexture.Height < Shared.stage.Y - Shared.WALL_HEIGHT)
                 {
                     position += yMovementSpeed;
                     playerAnimation = playerAnimations[0];

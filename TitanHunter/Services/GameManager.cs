@@ -115,7 +115,7 @@ namespace TitanHunter.Services
                 AddScore();
             }
         }
-
+         
         public bool ThrowMeteors(GameTime gameTime)
         {
             meteorTimer -= gameTime.ElapsedGameTime.TotalSeconds;

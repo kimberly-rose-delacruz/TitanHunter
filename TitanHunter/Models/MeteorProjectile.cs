@@ -18,15 +18,17 @@ namespace TitanHunter.Models
             this.direction = Dir.Left;
             this.speed = 250;
 
+            if (position.Y > Shared.stage.Y - projectileTexture.Height - Shared.WALL_HEIGHT)
+            {
+                position.Y = Shared.stage.Y - projectileTexture.Height - Shared.WALL_HEIGHT;
+            }
+
             if (position.Y < HeaderComponent.HEADER_HEIGHT)
             {
                 position.Y += HeaderComponent.HEADER_HEIGHT;
             }
 
-            if (position.Y > Shared.stage.Y - projectileTexture.Height)
-            {
-                position.Y = Shared.stage.Y - projectileTexture.Height;
-            }
+
         }
 
         protected override void InitializeTexture()
