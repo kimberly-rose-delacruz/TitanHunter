@@ -2,7 +2,7 @@
  *      This class will represent the creator's name.
  *      
  * Revision History:
- *          Created on December 6, 2022 by Kimberly Rose Dela Cruz
+ *      Created on December 6, 2022 by Kimberly Rose Dela Cruz
  */
 using System;
 using System.Collections.Generic;

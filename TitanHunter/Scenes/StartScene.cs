@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*StartScene.cs
+ *      This class will represent the page of the start page where it will show the Game's title, list of menu for the player to use.
+ *      
+ *  Revision History:
+ *      Created on December 7, 2022 by Kimberly Rose Dela Cruz
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,7 +41,7 @@ namespace TitanHunter.Scenes
             this.mainGame = game;
             InitializeResources();
 
-            Menu = new MenuComponent(game, spriteBatch, regular, highlight, menuItems);
+            Menu = new MenuComponent(game, regular, highlight, menuItems);
             components.Add(Menu);
             backgroundPosition = new Vector2(0, 0);
             Vector2 titlePosition = titleFont.MeasureString(gameTitle);
@@ -44,19 +50,23 @@ namespace TitanHunter.Scenes
             
         }
 
+        //using the show method from the startscene and play the song of the game by using Media Player.
         public override void Show()
         {
             MediaPlayer.IsRepeating = true;
+            //playing the background Music.
             MediaPlayer.Play(backgroundMusic);
             base.Show();
         }
 
+        //when the startscene is hidden stop the mediaplayer from playing the backgroundMusic
         public override void Hide()
         {
             MediaPlayer.Stop();
             base.Hide();
         }
 
+        //created this method to load all resources of the font texture and music for the game that will be used in the startscene.
         public void InitializeResources()
         {
             regular = mainGame.Content.Load<SpriteFont>("fonts/regular");
@@ -67,7 +77,7 @@ namespace TitanHunter.Scenes
 
         }
 
-
+        //draw the background texture and the title of the game.
         public override void Draw(GameTime gameTime)
         {
             mainGame._spriteBatch.Begin();

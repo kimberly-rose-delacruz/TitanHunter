@@ -1,4 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿/*Shared.cs
+ *      this class is just holding an constant Vector 2 stage as a reference for the preferred height and width set from the initialize value of stage of my game. I also include in this page the enum for direction to be accessible by the whole code.
+ *      
+ * Revision History
+ *      Created on December 7, 2022 by Kimberly Rose Dela Cruz
+ */
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;

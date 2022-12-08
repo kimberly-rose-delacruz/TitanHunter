@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿/*MainGame.cs
+ *      this is the mainGame class composing the entire structure of the game. I instantiate here the stage size and also handles the enabling and disabled of each scene based on player's navigation using keyboard keys. I also added the resetting of game resources when the game is over or even when the game is already ended. 
+ */
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using TitanHunter.Scenes;
@@ -91,14 +94,18 @@ namespace TitanHunter
 
             if (startScene.Enabled)
             {
+                //if the startscene is enabled
                 selectedIndex = startScene.Menu.selectedIndex;
                 if (selectedIndex == 0 && (keyboardState.IsKeyDown(Keys.Enter) && oldKeyboardState.IsKeyUp(Keys.Enter)))
                 {
+                    //when actionscene is enabled and selected it will be validated if the game is over or game is won true
                     if (gameLevelService.IsGameOver() == true || gameLevelService.IsGameWon() == true)
                     {
+                        //then the game will be reset.
                         gameLevelService.Reset();
                     }
 
+                    //then hide all scenes and show the action scene.
                     HideAllScenes();
                     actionScene.Show();
                 }
@@ -129,14 +136,17 @@ namespace TitanHunter
                 if (keyboardState.IsKeyDown(Keys.Escape) || 
                     (keyboardState.IsKeyDown(Keys.Enter) && oldKeyboardState.IsKeyUp(Keys.Enter)))
                 {
-
+                    //when action scene is enable and user attempts to click on escale or enter
+                    //it will check if there is a new highscore if yes
                     if (gameLevelService.HasNewHighScore == true)
                     {
+                        //it will redirect the user to the highscore
                         HideAllScenes();
                         highSCoreScene.Show();
                     }
                     else
                     {
+                        //else just show the startscene
                         HideAllScenes();
                         startScene.Show();
                     }    

@@ -1,4 +1,9 @@
-﻿
+﻿/*HighScoreScene.cs
+ *      This is a class that will draw all the score updates based from player's gameplay.
+ *      
+ *  Revision History
+ *      Created on December 7, 2022 by Kimberly Rose Dela Cruz 
+ */
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +27,8 @@ namespace TitanHunter.Scenes
         private const int Y_POSITION = 0;
         private const int ADJUSTEDTEXT_X_POSITION = 20;
         private string highScoreTitle = "High Score";
+        private const int NUMBER_OF_RANK = 5;
+        private const int PADDING_WIDTH = 5;
 
         Texture2D highScoreBackgroundTexture;
         Texture2D rankingThropyTexture;
@@ -51,10 +58,12 @@ namespace TitanHunter.Scenes
             rankingThropyTexture = mainGame.Content.Load<Texture2D>("images/throphy");
         }
 
+        //I use the show method from the Gamescene to set the list of highscores based from the service where there is the method to add score based on player's game outcome.
         public override void Show()
         {
             //in every time the user views the highscore scene, it will retrieve highest total player score.
-            highScores = mainGame.gameLevelService.scores.OrderByDescending(s => s.PlayerTotalScore).Take(5).ToList();
+            //in this game play I only get the max of 5 highest total score from the list.
+            highScores = mainGame.gameLevelService.scores.OrderByDescending(s => s.PlayerTotalScore).Take(NUMBER_OF_RANK).ToList();
             base.Show();
         }
 
@@ -70,10 +79,12 @@ namespace TitanHunter.Scenes
             mainGame._spriteBatch.DrawString(highScoreTitleFont, highScoreTitle, highScoreTitlePosition, textColor);
             mainGame._spriteBatch.DrawString(regularFont, TABLE_HEADER_TITLE, new Vector2(GAP_SPACE, Shared.stage.Y/3), Color.Gold);
 
+            //this is to draw each of the string in the highscore scene page according to the list of scores updated from highScore list of values.
             for (int i = 0; i < highScores.Count; i++)
             {
                 var score = highScores[i];
-                var totalScore = score.PlayerTotalScore.ToString().PadLeft(5, '0');
+                //I use the PadLeft to create an equal padding to show the score with equal sizes vertically.
+                var totalScore = score.PlayerTotalScore.ToString().PadLeft(PADDING_WIDTH, '0');
 
                 mainGame._spriteBatch.DrawString(regularFont, $"     {i + 1}           {totalScore}           {score.PlayTime.ToLongTimeString()}",new Vector2(GAP_SPACE, temporaryPosition.Y + regularFont.LineSpacing), textColor);
                 temporaryPosition.Y+= regularFont.LineSpacing;
